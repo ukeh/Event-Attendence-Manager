@@ -1,10 +1,12 @@
-package epi.ukeh.attendence
+package epi.ukeh.attendence.Event
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
+import epi.ukeh.attendence.Event.Events.EventActivity
+import epi.ukeh.attendence.R
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
