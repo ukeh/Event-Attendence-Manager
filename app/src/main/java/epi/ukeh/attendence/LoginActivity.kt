@@ -2,6 +2,7 @@ package epi.ukeh.attendence
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_login.*
@@ -19,6 +20,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        val pref=getSharedPreferences("event",0)
+        if(pref.getString("acces_token","")!=""){
+            startActivity(intentFor<EventActivity>())
+            finish()
+        }
 
     }
 
@@ -39,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                     .add("password", password.text.toString())
                     .build()
             val request = Request.Builder()
-                    .url("https://test3.hycoons.in/api/login")
+                    .url("https://test3.htycoons.in/api/login")
                     .post(body)
                     .build()
             val client = OkHttpClient()
@@ -59,7 +65,10 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intentFor<EventActivity>())
                         finish()
                         }}
-                400->{
+                400->{AlertDialog.Builder(this@LoginActivity).setTitle("Error")
+                        .setMessage("An error is occcured!")
+                        .setNeutralButton("OK"){dialog, which -> dialog.dismiss() }
+                        .show()
 
                     }
                     404->{
